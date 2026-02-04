@@ -76,4 +76,4 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}/libs:${{ github.workspace }}/projects/ww3
         run: |
-          pytest projects/ww3/tests
+          pytest tests
