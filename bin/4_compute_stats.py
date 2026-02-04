@@ -15,6 +15,7 @@ import torch
 import tqdm
 from mfai.pytorch.namedtensor import NamedTensor
 from typer import Typer
+
 from ww3.dataset import WW3Dataset
 from ww3.sample import Sample
 from ww3.settings import STATS_PATH

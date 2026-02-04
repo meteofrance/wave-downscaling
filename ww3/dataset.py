@@ -7,6 +7,7 @@ import xarray as xr
 from mfai.pytorch.namedtensor import NamedTensor
 from torch.utils.data import Dataset
 from tqdm import tqdm, trange
+
 from ww3.sample import Sample
 from ww3.settings import FORMATSTR, SCRATCH_PATH, GridType, WaveParamType
 

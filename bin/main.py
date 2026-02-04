@@ -6,6 +6,7 @@ Exemple usage:
 """
 
 from lightning.pytorch.cli import LightningCLI
+
 from ww3.datamodule import WW3DataModule
 from ww3.plmodules.baseplmodule import WW3BaseLightningModule
 

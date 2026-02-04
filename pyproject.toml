@@ -17,7 +17,7 @@ authors = [
 ]
 description = "Downscaling of waves models of Meteo France"
 readme = "README.md"
-requires-python = "3.11"
+requires-python = "==3.11"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache Software License",
@@ -25,7 +25,7 @@ classifiers = [
 ]
 dynamic = ["dependencies", "version"]
 license = {file = "LICENSE"}
-keywords = ["PyTorch", "Deep Learning", "Downscaling", 'Waves models "Artificial Intelligence", "Meteo-France"]
+keywords = ["PyTorch", "Deep Learning", "Downscaling", "Waves models", "Artificial Intelligence", "Meteo-France"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
@@ -97,14 +97,6 @@ ignore-variadic-names = true
 
 [tool.pyright]
 # https://microsoft.github.io/pyright/#/configuration?id=sample-pyprojecttoml-file
-
-## Run options
-include = [
-  "projects/ww3",
-]
-ignore = [
-  "projects/ww3/ww3/plmodules/flowplmodule.py"
-]
 
 verboseOutput = true
 
