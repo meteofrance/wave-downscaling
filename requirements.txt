@@ -1,0 +1,13 @@
+mfai @ git+https://github.com/meteofrance/mfai@v5.0.1
+zarr==3.0.6
+numcodecs==0.16.0
+dask==2025.3.0
+xarray==2025.4.0
+pytest-mock==3.15.1
+pytest==8.3.3
+copernicusmarine==2.2.3
+diffusers[torch]==0.35.2
+Cartopy==0.24.1
+tornado==6.4.1
+pyright==1.1.408
+joblib==1.5.3

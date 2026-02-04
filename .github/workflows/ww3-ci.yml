@@ -1,0 +1,79 @@
+name: CI WW3
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Linting and Complexity Checks
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: Install Linting tools
+        run: pip install ruff==0.6.4
+
+      - name: Run Ruff Format Check
+        working-directory: ./projects/ww3
+        run: ruff format . --check
+
+      - name: Run Ruff Lint Check
+        working-directory: ./projects/ww3
+        run: ruff check .
+
+      - name: Install Complexity tools
+        run: pip install sourcery-analytics
+
+      - name: Run Sourcery Analysis
+        working-directory: ./projects/ww3
+        run: sourcery-analytics assess .
+
+  tests:
+    name: Unit Tests
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          echo "Disk space cleaned."
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y enchant-2 aspell-fr aspell-en
+
+      - name: Install Python Dependencies
+        run: |
+          pip install --upgrade pip wheel setuptools
+          # Installation depuis le requirements.txt du projet
+          pip install -r projects/ww3/requirements.txt
+
+      - name: Run Pytest
+        env:
+          PYTHONPATH: ${{ github.workspace }}/libs:${{ github.workspace }}/projects/ww3
+        run: |
+          pytest projects/ww3/tests

@@ -1,0 +1,597 @@
+GRIDS:
+  BRETAGNE0002:
+    downscale_size:
+    - 58
+    - 94
+    downscale_step: 25
+    extent: &id001
+    - 49.858
+    - 47.0
+    - -5.8
+    - -1.13
+    prefix: bret
+    resolution: 0.002
+    size: &id006
+    - 1430
+    - 2336
+  CORSE0002:
+    downscale_size:
+    - 37
+    - 27
+    downscale_step: 25
+    extent: &id002
+    - 43.08
+    - 41.2
+    - 8.4
+    - 9.7
+    prefix: corse
+    resolution: 0.002
+    size: &id007
+    - 901
+    - 651
+  GASCOGNE0002:
+    downscale_size:
+    - 87
+    - 62
+    downscale_step: 25
+    extent: &id004
+    - 47.5
+    - 43.2
+    - -3.5
+    - -0.45
+    prefix: gas
+    resolution: 0.002
+    size: &id009
+    - 2151
+    - 1526
+  LIONAZUR0002:
+    downscale_size:
+    - 60
+    - 99
+    downscale_step: 25
+    extent: &id005
+    - 44.96
+    - 42.0
+    - 3.0
+    - 7.91
+    prefix: lion
+    resolution: 0.002
+    size: &id010
+    - 1481
+    - 2456
+  MANCHE0002:
+    downscale_size:
+    - 61
+    - 117
+    downscale_step: 25
+    extent: &id003
+    - 51.5
+    - 48.5
+    - -2.5
+    - 3.33
+    prefix: manche
+    resolution: 0.002
+    size: &id008
+    - 1501
+    - 2916
+WEATHER_PARAMS:
+  arpege_u10:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 10
+    long_name: 10 metre U wind component
+    model: arpege
+    name: arpege_u10
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: heightAboveGround
+    unit: m s**-1
+  arpege_v10:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 10
+    long_name: 10 metre V wind component
+    model: arpege
+    name: arpege_v10
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: heightAboveGround
+    unit: m s**-1
+  mfwam_cos_mdps:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Primary wave direction
+    model: mfwam
+    name: mfwam_cos_mdps
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: Degree true
+  mfwam_sin_mdps:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Primary wave direction
+    model: mfwam
+    name: mfwam_sin_mdps
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: Degree true
+  mfwam_cos_mdww:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Mean direction of wind waves
+    model: mfwam
+    name: mfwam_cos_mdww
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: Degree true
+  mfwam_sin_mdww:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Mean direction of wind waves
+    model: mfwam
+    name: mfwam_sin_mdww
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: Degree true
+  mfwam_mpps:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Primary wave mean period
+    model: mfwam
+    name: mfwam_mpps
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: s
+  mfwam_mpww:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Mean period of wind waves
+    model: mfwam
+    name: mfwam_mpww
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: s
+  mfwam_shps:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Significant height of primary wave
+    model: mfwam
+    name: mfwam_shps
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: m
+  mfwam_shww:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Significant height of wind waves
+    model: mfwam
+    name: mfwam_shww
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: m
+  mfwam_swh:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Signific.height,combined wind waves+swell
+    model: mfwam
+    name: mfwam_swh
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: m
+  ww3_cos_mdps:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Primary wave direction
+    model: ww3
+    name: ww3_cos_mdps
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: Degree true
+  ww3_sin_mdps:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Primary wave direction
+    model: ww3
+    name: ww3_sin_mdps
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: Degree true
+  ww3_cos_mdww:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Mean direction of wind waves
+    model: ww3
+    name: ww3_cos_mdww
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: Degree true
+  ww3_sin_mdww:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Mean direction of wind waves
+    model: ww3
+    name: ww3_sin_mdww
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: Degree true
+  ww3_mpps:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Primary wave mean period
+    model: ww3
+    name: ww3_mpps
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: s
+  ww3_mpww:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Mean period of wind waves
+    model: ww3
+    name: ww3_mpww
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: s
+  ww3_shps:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Significant height of primary wave
+    model: ww3
+    name: ww3_shps
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: m
+  ww3_shww:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Significant height of wind waves
+    model: ww3
+    name: ww3_shww
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: m
+  ww3_swh:
+    cumulative: false
+    extent:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    grid:
+    - BRETAGNE0002
+    - CORSE0002
+    - MANCHE0002
+    - GASCOGNE0002
+    - LIONAZUR0002
+    levels: 0
+    long_name: Signific.height,combined wind waves+swell
+    model: ww3
+    name: ww3_swh
+    shape:
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    - *id010
+    type_level: meanSea
+    unit: m

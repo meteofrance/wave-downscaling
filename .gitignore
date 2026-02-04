@@ -1,0 +1,7 @@
+lightning_logs/
+
+*.gif
+# *.png
+*.log
+
+ex_tensors/

@@ -1,0 +1,82 @@
+seed_everything: true
+
+model:
+  class_path: ww3.plmodules.diffusionplmodule.DiffusionLightningModule
+  init_args:
+    lr_scheduler_interval: step
+    model:
+      class_path: diffusers.models.UNet2DModel
+      init_args:
+        in_channels: 22  # 9 mfwam variables + 4 forcings + 9 ww3 noisy variables
+        out_channels: 9  # 9 ww3 variables
+        sample_size:
+          - 64 # 58 padded, need to be divisible by 2 ** (len(block_out_channels) - 1)
+          - 96 # 94 padded, need to be divisible by 2 ** (len(block_out_channels) - 1)
+        dropout: 0.1
+        num_class_embeds: 103
+        resnet_time_scale_shift: "scale_shift"
+        block_out_channels:
+          - 128
+          - 256
+          # - 384 # if we want to upgrade the size of the images we have to add an other downscale/upsale step
+
+        down_block_types: 
+          - "DownBlock2D"
+          - "AttnDownBlock2D"
+        up_block_types: 
+          - "AttnUpBlock2D"
+          - "UpBlock2D"
+      
+    loss:
+      class_path: torch.nn.MSELoss
+
+data:
+  batch_size: 32
+  pct_in_train: 0.7
+  num_workers: 8
+  prefetch_factor: 4
+  transforms_list:
+    - class_path: ww3.transforms.NaNToNum
+      init_args:
+        downscaling_stride: 25
+    - class_path: ww3.transforms.Normalize
+      init_args:
+        interval: [-1, 1]
+  grids_list:
+    - BRETAGNE0002
+  wave_params:
+    - cos_mdps
+    - sin_mdps
+    - cos_mdww
+    - sin_mdww
+    - mpps
+    - mpww
+    - shps
+    - shww
+    - swh
+  include_arpege: true
+  include_forcings: true
+  include_temporality: true
+  downscaling_stride: 25  # We take one pixel every 25 pixels
+
+trainer:
+  max_epochs: 150
+  precision: "bf16-mixed" # on V100 else "bf16-mixed"
+  gradient_clip_algorithm: "norm"
+  gradient_clip_val: 1.0
+  logger:
+    class_path: lightning.pytorch.loggers.TensorBoardLogger
+    init_args:
+      save_dir: /scratch/shared/ww3/exp/
+      name: diffusion_cond_test
+  callbacks:
+    - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+      init_args:
+        filename: "{epoch:02d}-{val_loss:.2f}"
+        monitor: val_loss
+        mode: min
+        save_top_k: 1    # Save the best model
+        save_last: True  # Also save the last model
+    - class_path: lightning.pytorch.callbacks.LearningRateMonitor
+      init_args:
+        logging_interval: step
