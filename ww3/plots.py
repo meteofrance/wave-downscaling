@@ -7,6 +7,7 @@ from cartopy.crs import PlateCarree
 from matplotlib.figure import Figure
 from mfai.pytorch.namedtensor import NamedTensor
 from torch import Tensor
+
 from ww3.settings import GRIDS, METADATA
 
 # Setup cache dir for cartopy to avoid downloading data each time

@@ -3,6 +3,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 from mftools.utils_log import get_logger
+
 from ww3.data.grib_utils import load_grib
 
 this_module_name = Path(__file__).name
