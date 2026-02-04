@@ -98,14 +98,6 @@ ignore-variadic-names = true
 [tool.pyright]
 # https://microsoft.github.io/pyright/#/configuration?id=sample-pyprojecttoml-file
 
-## Run options
-include = [
-  "projects/ww3",
-]
-ignore = [
-  "projects/ww3/ww3/plmodules/flowplmodule.py"
-]
-
 verboseOutput = true
 
 reportMissingImports = "error"
