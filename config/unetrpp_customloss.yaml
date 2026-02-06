@@ -1,30 +1,31 @@
 seed_everything: true
 
 model:
-  class_path: ww3.plmodules.directplmodule.DirectLightningModule
-  residual_prediction: true
-  lr_scheduler_interval: step
-  model:
-    class_path: mfai.pytorch.models.unetrpp.UNetRPP
-    init_args:
-      in_channels: 13  # 9 mfwam variables + 4 forcings
-      out_channels: 9  # 9 ww3 variables
-      input_shape:
-        - 58
-        - 94
-      settings:
-        autopad_enabled: True
-  loss:
-    class_path: ww3.plmodule.MSEPlusPerceptualLoss
-    init_args:
-      lambda_mse: 20
-      lambda_perceptual: 1
-      in_channels: 9
-      resize_input: True
-      pre_trained: True
-      channel_iterative_mode: True
-      feature_layer_ids: [4, 9, 16]
-      feature_block_ids: [0, 1, 2]
+  class_path: ww3.plmodules.directplmodule.WW3DirectLightningModule
+  init_args:
+    residual_prediction: true
+    lr_scheduler_interval: step
+    model:
+      class_path: mfai.pytorch.models.unetrpp.UNetRPP
+      init_args:
+        in_channels: 13  # 9 mfwam variables + 4 forcings
+        out_channels: 9  # 9 ww3 variables
+        input_shape:
+          - 58
+          - 94
+        settings:
+          autopad_enabled: True
+    loss:
+      class_path: ww3.plmodules.directplmodule.MSEPlusPerceptualLoss
+      init_args:
+        lambda_mse: 20
+        lambda_perceptual: 1
+        in_channels: 9
+        resize_input: True
+        pre_trained: True
+        channel_iterative_mode: True
+        feature_layer_ids: [4, 9, 16]
+        feature_block_ids: [0, 1, 2]
 
 data:
   batch_size: 16

@@ -1,21 +1,22 @@
 seed_everything: true
 
 model:
-  class_path: ww3.plmodules.directplmodule.DirectLightningModule
-  residual_prediction: true
-  lr_scheduler_interval: step
-  model:
-    class_path: mfai.pytorch.models.unetrpp.UNetRPP
-    init_args:
-      in_channels: 13  # 9 mfwam variables + 4 forcings
-      out_channels: 9  # 9 ww3 variables
-      input_shape:
-        - 58
-        - 94
-      settings:
-        autopad_enabled: True
-  loss:
-    class_path: torch.nn.MSELoss
+  class_path: ww3.plmodules.directplmodule.WW3DirectLightningModule
+  init_args:
+    residual_prediction: true
+    lr_scheduler_interval: step
+    model:
+      class_path: mfai.pytorch.models.unetrpp.UNetRPP
+      init_args:
+        in_channels: 13  # 9 mfwam variables + 4 forcings
+        out_channels: 9  # 9 ww3 variables
+        input_shape:
+          - 58
+          - 94
+        settings:
+          autopad_enabled: True
+    loss:
+      class_path: torch.nn.MSELoss
 
 data:
   batch_size: 16

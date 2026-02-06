@@ -1,0 +1,4 @@
+backend      : Webagg
+webagg.address: 0.0.0.0
+webagg.open_in_browser: false
+webagg.port: 10303
