@@ -1,4 +1,4 @@
-name: CI Wave Downscaling
+name: CI
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
         working-directory: .
         run: 
           pip install sourcery-analytics
-          sourcery-analytics assess ${{ steps.changed-py-files.outputs.all_changed_files }}
+          sourcery-analytics assess .
 
   tests:
     name: Unit Tests

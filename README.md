@@ -1,9 +1,9 @@
 # Wave Downscaling
 
 ## Description
-The project consists of **downs-caling a wave forecasting model** from resolution 10km to 5km using Deep Learning. 
+The project consists of **downscaling a wave forecasting model** from resolution 10km to 5km using Deep Learning. 
 
-More precisely, we down-scale ARPEGE‑forced MFWAM forecasts (10 km resolution) to ARPEGE‑forced WW3 analyses (200 m resolution degraded to 5km) for seven wave parameters: height, direction and period of swell and wind waves + height of combined wind waves and swell.
+More precisely, we downscale ARPEGE‑forced MFWAM forecasts (10 km resolution) to ARPEGE‑forced WW3 analyses (200 m resolution degraded to 5km) for seven wave parameters: height, direction and period of swell and wind waves + height of combined wind waves and swell.
 The work is carried out on the Britany domain.
 
 Detailed description of the deep learning experiments and their results can be found in [this report](Internship_report_Mathilde_Ferreira.pdf) (French).
@@ -54,6 +54,7 @@ Remember to change the `SCRATCH_PATH` variable in `ww3/settings.py` to the locat
 ### Preprocessing
 
 **1 – Download the data**
+
 The data download is not publicly available.  
 GRIB files are stored under the following directory tree:
 
@@ -67,6 +68,7 @@ A description of the data layout is shown below:
 ![](images/schema_data.svg)
 
 **1.1 – Download Satellite Observations**
+
 You can visualise the satellite observations [here](https://data.marine.copernicus.eu/viewer/expert).  
 You must first create a Copernicus account.
 
@@ -83,6 +85,7 @@ python bin/2_write_metadata.py
 Run this again whenever the raw data change (e.g., adding/removing a parameter or a grid).
 
 **3 - Convert GRIB to Zarr**
+
 Converting the data to Zarr enables much faster reads than GRIB.
 ```bash
 python bin/3_convert_to_zarr.py ww3 mfwam arpege 2023010100 2024010100 --area CORSE0002 BRETAGNE0002
@@ -108,6 +111,7 @@ The command pre‑stores the dataset in NPZ format with the correct down‑scali
 ## Training
 
 **1 - Define the configuration**
+
 Edit the YAML files in the config folder (dataset, model, trainer) to set the desired training parameters.
 
 **2 - Launch training**
