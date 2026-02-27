@@ -45,10 +45,6 @@ keywords = ["PyTorch", "Deep Learning", "Downscaling", "Waves models", "Artifici
 [tool.setuptools.packages.find]
 exclude = ["config*", "images*"]
 
-# Include marker file `py.typed` to respect PEP561 and declare this package as type hinted
-[tool.setuptools.package-data]
-"wave-downscaling" = ["py.typed"]
-
 [project.urls]
 Homepage = "https://github.com/meteofrance/wave-downscaling"
 
