@@ -42,9 +42,23 @@ classifiers = [
 license = {file = "LICENSE"}
 keywords = ["PyTorch", "Deep Learning", "Downscaling", "Waves models", "Artificial Intelligence", "Meteo-France"]
 
-
 [tool.setuptools.packages.find]
 exclude = ["config*", "images*"]
+
+# Include marker file `py.typed` to respect PEP561 and declare this package as type hinted
+[tool.setuptools.package-data]
+"wave-downscaling" = ["py.typed"]
+
+[project.urls]
+Homepage = "https://github.com/meteofrance/wave-downscaling"
+
+[tool.sourcery-analytics]
+
+[tool.sourcery-analytics.thresholds]
+method_length = 64
+method_cyclomatic_complexity = 26
+method_cognitive_complexity = 34
+method_working_memory = 45
 
 [tool.ruff]
 target-version = "py312"
@@ -79,12 +93,14 @@ ignore = [
     "D213",  # Allow multi-line-summary-second-line
     "D415",  # Allow missing-terminal-punctuation
 
-    # "D101",  # Allow undocumented-public-class
-    # "D102",  # Allow undocumented-public-method
-    # "D103",  # Allow undocumented-public-function
-    # "D104",  # Allow undocumented-public-package
+    # Temporary, to be removed once refacto done:
+    "D101",  # Allow undocumented-public-class
+    "D102",  # Allow undocumented-public-method
+    "D103",  # Allow undocumented-public-function
+    "D104",  # Allow undocumented-public-package
     "D105",  # Allow undocumented-magic-method
-    # "D107",  # Allow undocumented-public-init
+    "D107",  # Allow undocumented-public-init
+    "E501",  # Allow lines too long
 ]
 
 [tool.ruff.lint.pydocstyle]
