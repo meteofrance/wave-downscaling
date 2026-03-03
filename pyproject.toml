@@ -1,10 +1,3 @@
-[build-system]
-requires = ["setuptools", "wheel", "setuptools-git-versioning"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools-git-versioning]
-enabled = true
-
 [project]
 name = "wave-downscaling"
 authors = [
@@ -17,22 +10,40 @@ authors = [
 ]
 description = "Downscaling of waves models of Meteo France"
 readme = "README.md"
-requires-python = "==3.11"
+version = "v0.0.0"
+requires-python = "==3.12.*"
+dependencies = [
+  "cartopy>=0.25.0",
+  "zarr==3.1.5",
+  "numcodecs==0.16.5",
+  "dask==2026.1.2",
+  "copernicusmarine==2.3.0",
+  "diffusers[torch]==0.36.0",
+  "netcdf4==1.7.2",
+  "pyright>=1.1.405",
+  "tornado>=6.5.4",
+  "xarray>=2026.1.0",
+  "torch==2.10.*",
+  "mfai>=6.3.0",
+  "joblib==1.5.3",
+  "cfgrib==0.9.15.1",
+  "lightning==2.6.1",
+  "jsonargparse[signatures]<=4.41.0",
+  "pyright[nodejs]",
+  "ruff",
+  "pytest",
+  "pytest-cov",
+]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
 ]
-dynamic = ["dependencies", "version"]
 license = {file = "LICENSE"}
 keywords = ["PyTorch", "Deep Learning", "Downscaling", "Waves models", "Artificial Intelligence", "Meteo-France"]
 
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
-
-# Include marker file `py.typed` to respect PEP561 and declare this package as type hinted
-[tool.setuptools.package-data]
-"wave-downscaling" = ["py.typed"]
+[tool.setuptools.packages.find]
+exclude = ["config*", "images*"]
 
 [project.urls]
 Homepage = "https://github.com/meteofrance/wave-downscaling"
@@ -46,19 +57,20 @@ method_cognitive_complexity = 34
 method_working_memory = 45
 
 [tool.ruff]
-target-version = "py311"
+target-version = "py312"
 line-length = 88
 builtins = ["_"]
-exclude = [
+include = [
+  "ww3/**/*.py",
+  "bin/**/*.py"
 ]
 
 [tool.ruff.format]
 docstring-code-format = true
 
-
 [tool.ruff.lint]
 select = [
-  "I",  # isort
+  "I",  # I = isort
   "F",  # pyflakes
   "W",  # pycodestyle warnings
   "E",  # pycodestyle errors
@@ -98,6 +110,14 @@ ignore-variadic-names = true
 [tool.pyright]
 # https://microsoft.github.io/pyright/#/configuration?id=sample-pyprojecttoml-file
 
+## Run options
+include = [
+  "ww3",
+  "bin",
+  "tests",
+]
+ignore = []
+
 verboseOutput = true
 
 reportMissingImports = "error"
@@ -131,7 +151,7 @@ deprecateTypingAliases = true  # Deprecates the use of typing.List, Dict, ...
 reportPropertyTypeMismatch = "error"
 
 # Cyclical import chains slow down type analysis and hint at architectural layering issues.
-reportImportCycles = "none"
+reportImportCycles = "error"
 
 reportUnusedImport = "error"
 
@@ -143,7 +163,7 @@ reportUntypedFunctionDecorator = "error"
 
 reportUntypedClassDecorator = "error"
 
-reportUntypedBaseClass = "none"
+reportUntypedBaseClass = "error"
 
 reportUntypedNamedTuple = "error"
 
@@ -154,13 +174,12 @@ reportTypeCommentUsage = "error"
 reportPrivateImportUsage = "error"
 
 reportConstantRedefinition = "error"
-reportIncompatibleVariableOverride = "none"
 
 # reportDeprecated [boolean or string, optional]: Generate or suppress diagnostics for use of a class or function that has been marked as deprecated. The default value for this setting is "none".
 
 reportInconsistentConstructor = "error"
 
-reportUninitializedInstanceVariable = "none"
+reportUninitializedInstanceVariable = "error"
 
 # Disallow input or return parameters for functions or methods that have an unknown type
 reportUnknownParameterType = "none"
@@ -187,6 +206,6 @@ reportUnnecessaryTypeIgnoreComment = "error"
 
 reportMatchNotExhaustive = "error"
 
-reportUnreachable = "none"
+reportUnreachable = "error"
 
-reportImplicitOverride = "none"  # Because @override decorator is 3.12 >
+reportImplicitOverride = "error"

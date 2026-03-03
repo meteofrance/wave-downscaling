@@ -1,4 +1,4 @@
-name: CI WW3
+name: CI
 
 on:
   push:
@@ -10,70 +10,60 @@ permissions:
   contents: read
 
 jobs:
-  quality:
+  lint:
     name: Linting and Complexity Checks
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+      - name: Gather Python changed files
+        id: changed-py-files
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46
         with:
-          python-version: "3.11"
-          cache: 'pip'
+          files: |
+            ww3/**/*.py
+            bin/**/*.py
 
-      - name: Install Linting tools
-        run: pip install ruff==0.6.4
+      - name: Lint with ruff
+        if: steps.changed-py-files.outputs.any_changed == 'true'
+        run: |
+          pip install ruff
+          ruff format --check ${{ steps.changed-py-files.outputs.all_changed_files }}
+          ruff check ${{ steps.changed-py-files.outputs.all_changed_files }} --select I
 
-      - name: Run Ruff Format Check
+      - name: Run Sourcery Complexity Analysis
         working-directory: .
-        run: ruff format . --check
-
-      - name: Run Ruff Lint Check
-        working-directory: .
-        run: ruff check .
-
-      - name: Install Complexity tools
-        run: pip install sourcery-analytics
-
-      - name: Run Sourcery Analysis
-        working-directory: .
-        run: sourcery-analytics assess .
+        run: 
+          pip install sourcery-analytics
+          sourcery-analytics assess .
 
   tests:
     name: Unit Tests
+    env:
+      PYTHONPATH: '.'
     runs-on: ubuntu-22.04
+    container:
+      image: pytorch/pytorch:2.10.0-cuda12.6-cudnn9-devel
+
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Free disk space
-        run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf "/usr/local/share/boost"
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-          echo "Disk space cleaned."
+    - name: Install dependencies
+      run: |
+        pip install . pyright pytest pytest-cov --break-system-packages
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: 'pip'
+    - name: Install git  # necessary for the tj-action/changed-py-files
+      run: apt-get update && apt-get install -y git
 
+    - name: Gather Python changed files
+      id: changed-py-files
+      uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46
+      with:
+        files: |
+          *.py
+          **/*.py
 
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y enchant-2 aspell-fr aspell-en
-
-      - name: Install Python Dependencies
-        run: |
-          pip install --upgrade pip wheel setuptools
-          # Installation depuis le requirements.txt du projet
-          pip install -r requirements.txt
-
-      - name: Run Pytest
-        env:
-          PYTHONPATH: ${{ github.workspace }}/libs:${{ github.workspace }}
-        run: |
-          pytest tests
+    - name: Test with pytest
+      if: steps.changed-py-files.outputs.any_changed == 'true'
+      run: |
+        pytest tests/

@@ -8,7 +8,7 @@ Exemple usage:
 from lightning.pytorch.cli import LightningCLI
 
 from ww3.datamodule import WW3DataModule
-from ww3.plmodules.baseplmodule import WW3BaseLightningModule
+from ww3.plmodules.directplmodule import WW3DirectLightningModule
 
 
 class WW3CLI(LightningCLI):
@@ -18,7 +18,7 @@ class WW3CLI(LightningCLI):
 
 if __name__ == "__main__":
     WW3CLI(
-        model_class=WW3BaseLightningModule,
+        model_class=WW3DirectLightningModule,
         datamodule_class=WW3DataModule,
         subclass_mode_model=True,
     )

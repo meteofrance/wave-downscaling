@@ -4,9 +4,9 @@ from typing import Any, Literal
 import torch
 import torchmetrics as tm
 from lightning import LightningModule
+from mfai.pytorch.lr_scheduler import LinearWarmupCosineAnnealingLR
 from mfai.pytorch.models.base import BaseModel
 from mfai.pytorch.namedtensor import NamedTensor
-from pl_bolts.optimizers.lr_scheduler import LinearWarmupCosineAnnealingLR
 from torch.optim import AdamW
 
 from ww3.dataset import Item
