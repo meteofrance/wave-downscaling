@@ -64,9 +64,6 @@ include = [
   "ww3/**/*.py",
   "bin/**/*.py"
 ]
-exclude = [
-  "tests/**/*.py",
-]
 
 [tool.ruff.format]
 docstring-code-format = true
